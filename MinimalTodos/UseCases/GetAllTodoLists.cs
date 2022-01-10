@@ -1,14 +1,13 @@
 ﻿using MediatR;
 using MinimalTodos.Data;
-using MinimalTodos.Domain;
 
 namespace MinimalTodos.UseCases
 {
-    public class CreateTodoList
+    public class GetAllTodoLists
     {
         public record Request : IRequest<IResult>
         {
-            public string Name { get; init; } = string.Empty;
+
         }
 
         public class Handler : IRequestHandler<Request, IResult>
@@ -21,18 +20,8 @@ namespace MinimalTodos.UseCases
             }
             public async Task<IResult> Handle(Request request, CancellationToken cancellationToken)
             {
-                var list = new TodoList()
-                {
-                    Title = request.Name
-                };
-                _dbContext.ToDoLists.Add(list);
-                await _dbContext.SaveChangesAsync(cancellationToken);
-                var response = new { id = list.Id };
-                return Results.CreatedAtRoute(nameof(GetTodoList), response, response);
-
+                return Results.Ok(_dbContext.ToDoLists.ToList());
             }
         }
     }
-    
-
 }

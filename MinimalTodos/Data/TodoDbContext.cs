@@ -11,5 +11,11 @@ namespace MinimalTodos.Data
         }
         public DbSet<TodoList> ToDoLists => Set<TodoList>();
         public DbSet<Todo> Todos => Set<Todo>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(TodoDbContext).Assembly);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

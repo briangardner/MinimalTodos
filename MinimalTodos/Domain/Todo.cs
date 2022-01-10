@@ -3,6 +3,7 @@
     public class Todo
     {
         public Guid Id { get; init; } = Guid.NewGuid();
-        public string? Text { get; set; } = default;
+        public Guid ListId { get; init; }
+        public string Text { get; set; } = string.Empty;
     }
 }

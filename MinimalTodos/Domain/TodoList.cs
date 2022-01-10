@@ -2,13 +2,13 @@
 {
     public class TodoList
     {
-        private readonly ICollection<Todo> _todos = new List<Todo>();
+        private readonly HashSet<Todo> _todos = new HashSet<Todo>();
 
-        public Guid Id { get; init; } = Guid.NewGuid(); 
+        public Guid Id { get; init; } = Guid.NewGuid();
         public string Title { get; set; } = String.Empty;
-        public IReadOnlyCollection<Todo> Todos  => _todos.ToList();
+        public IReadOnlyCollection<Todo> Todos => _todos.ToList();
 
-        public void AddTodo(Todo todo) => _todos?.Add(todo);
+        public Todo AddTodo(Todo todo) { _todos?.Add(todo); return todo;  }
         public void RemoveTodo(Todo todo)
         {
             if (_todos.Contains(todo))
