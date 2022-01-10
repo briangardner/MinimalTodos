@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MinimalTodos.Data;
+using System.Text.Json.Serialization;
 
 namespace MinimalTodos.UseCases
 {
@@ -8,6 +9,7 @@ namespace MinimalTodos.UseCases
     {
         public record Request : IRequest<IResult>
         {
+            [JsonIgnore]
             public Guid ListId { get; init; }
             public string Text { get; init; } = string.Empty;
 
